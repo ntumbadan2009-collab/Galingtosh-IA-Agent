@@ -9,8 +9,17 @@
     "icon": "./assets/icon.svg",
     "web": {
       "bundler": "metro",
-      "output": "static",
-      "favicon": "./assets/icon.svg"
+      "output": "single",
+      "favicon": "./assets/icon.svg",
+      "name": "Galingtosh",
+      "shortName": "Galingtosh",
+      "lang": "fr",
+      "scope": "./",
+      "themeColor": "#080611",
+      "backgroundColor": "#080611",
+      "display": "standalone",
+      "startUrl": "./",
+      "orientation": "portrait"
     },
     "experiments": {
       "baseUrl": "/Galingtosh-IA-Agent"
