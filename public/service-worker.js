@@ -18,7 +18,7 @@ self.addEventListener('fetch', event => {
     return;
   }
   event.respondWith(caches.match(request).then(cached => cached || fetch(request).then(response => {
-    if (response.ok && /\\.(?:js|css|svg|png|woff2?)$/i.test(url.pathname)) { const copy = response.clone(); caches.open(CACHE_NAME).then(cache => cache.put(request, copy)); }
+    if (response.ok && /\.(?:js|css|svg|png|woff2?)$/i.test(url.pathname)) { const copy = response.clone(); caches.open(CACHE_NAME).then(cache => cache.put(request, copy)); }
     return response;
   })));
 });
