@@ -1,14 +1,14 @@
 {
-  "id": "/Galingtosh-IA-Agent/",
+  "id": "./",
   "name": "Galingtosh",
   "short_name": "Galingtosh",
   "description": "Agent IA de création et de rendu vidéo",
   "lang": "fr",
-  "start_url": "/Galingtosh-IA-Agent/",
-  "scope": "/Galingtosh-IA-Agent/",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
-  "orientation": "portrait-primary",
+  "orientation": "portrait",
   "background_color": "#080611",
   "theme_color": "#080611",
-  "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
+  "icons": [{ "src": "./icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
 }
