@@ -4,9 +4,7 @@ import {SafeAreaProvider,SafeAreaView} from 'react-native-safe-area-context';
 import {StatusBar as ExpoStatusBar} from 'expo-status-bar';
 import {Feather,Ionicons} from '@expo/vector-icons';
 import {LinearGradient} from 'expo-linear-gradient';
-import {File} from 'expo-file-system';
 import * as DocumentPicker from 'expo-document-picker';
-import * as WebBrowser from 'expo-web-browser';
 import {supabase,supabaseConfigured,SUPABASE_URL} from './src/lib/supabase';
 import {sendToAgent} from './src/lib/ai';
 import {getRenderDownloadUrl,getRenderJob,listRenderJobs,requestRender,RenderJob} from './src/lib/render';
@@ -210,7 +208,7 @@ function AppContent(){
   setAuthBusy(true);
   try{
    const {data,error}=await supabase.auth.signInWithOAuth({provider:'google',options:{redirectTo:REDIRECT,skipBrowserRedirect:Platform.OS!=='web'}});
-   if(error)throw error;if(Platform.OS!=='web'){if(!data.url)throw new Error("URL OAuth Google absente.");const result=await WebBrowser.openAuthSessionAsync(data.url,REDIRECT);if(result.type==='success'&&result.url)await handleAuthUrl(result.url);}
+   if(error)throw error;if(Platform.OS!=='web'){if(!data.url)throw new Error("URL OAuth Google absente.");const result=await import('expo-web-browser').then(m=>m.openAuthSessionAsync(data.url!,REDIRECT));if(result.type==='success'&&result.url)await handleAuthUrl(result.url);}
   }catch(e:any){showAlert('Connexion Google impossible','Veuillez réessayer ou utiliser la connexion par e-mail.');}
   finally{setAuthBusy(false);}
  }
@@ -246,7 +244,7 @@ function AppContent(){
   try{
    const picked=await DocumentPicker.getDocumentAsync({type:['image/*','video/*','audio/*'],copyToCacheDirectory:true,multiple:false});
    if(picked.canceled||!picked.assets?.length)return;
-   const file=picked.assets[0];const browserFile=(file as any).file as Blob|undefined;const local=Platform.OS==='web'?null:new File(file.uri);
+   const file=picked.assets[0];const browserFile=(file as any).file as Blob|undefined;const local=Platform.OS==='web'?null:await import('expo-file-system').then(({File})=>new File(file.uri));
    const mime=file.mimeType||browserFile?.type||local?.type||'';
    const allowed=['image/png','image/jpeg','image/webp','image/gif','video/mp4','video/quicktime','video/webm','audio/mpeg','audio/wav','audio/mp4','audio/ogg'];
    if(!allowed.includes(mime))throw new Error('Format non pris en charge. Utilisez JPG, PNG, WebP, GIF, MP4, MOV, WebM, MP3, WAV, M4A ou OGG.');
