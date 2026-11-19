@@ -1,0 +1,19 @@
+{
+  "expo": {
+    "name": "Galingtosh",
+    "slug": "galingtosh-web",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "scheme": "galingtosh",
+    "icon": "./assets/icon.svg",
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/icon.svg"
+    },
+    "experiments": {
+      "baseUrl": "/Galingtosh-IA-Agent"
+    }
+  }
+}
